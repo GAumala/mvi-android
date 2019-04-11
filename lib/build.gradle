@@ -1,13 +1,13 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.gaumala.mvi"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -26,7 +26,7 @@ dependencies {
 
     // ViewModel and LiveData
     def lifecycle_version = "2.0.0"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 }

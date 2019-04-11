@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel;
  * and Side-Effect types so that your application state can persist
  * configuration changes like device rotations.</p>
  *
- * <p>Since view models are instantiated by the android framework, you have to
+ * <p>Since view models can be instantiated by the android framework, you have to
  * create a {@link Dispatcher} object yourself, along with initial app state and
  * then pass it to your view model using
  * {@link BaseViewModel#setDispatcher(Dispatcher)} It is recommended that you
@@ -25,6 +25,15 @@ public class BaseViewModel<T, U> extends ViewModel {
 
     public boolean isInitialized() {
         return dispatcher != null;
+    }
+
+    /**
+     * Constructor with no parameters. Used by the android framework.
+     */
+    public BaseViewModel() {}
+
+    public BaseViewModel(Dispatcher<T, U> dispatcher) {
+        this.dispatcher = dispatcher;
     }
 
     /**
