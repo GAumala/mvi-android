@@ -71,16 +71,17 @@ class RedditGUI extends BaseUI<RedditState> {
         if (state instanceof RedditState.Input)
             showInputForm((RedditState.Input) state);
         else
-            showPostsRecyler();
+            showPostsRecyler(state);
 
-        postsAdapter.update(RedditItemFactory.createRecyclerItems(
-                state, p -> openLink(p.url())));
     }
 
-    private void showPostsRecyler() {
+    private void showPostsRecyler(RedditState state) {
         Animations.switchViewsWithHorizontalSlide(
                 inputForm, postsRecycler, false);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        postsAdapter.update(RedditItemFactory.createRecyclerItems(
+                state, p -> openLink(p.url())));
     }
 
     private void openLink(String url) {

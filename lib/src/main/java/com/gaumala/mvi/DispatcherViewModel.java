@@ -13,14 +13,14 @@ import androidx.lifecycle.ViewModel;
  * <p>Since view models can be instantiated by the android framework, you have to
  * create a {@link Dispatcher} object yourself, along with initial app state and
  * then pass it to your view model using
- * {@link BaseViewModel#setDispatcher(Dispatcher)} It is recommended that you
+ * {@link DispatcherViewModel#setDispatcher(Dispatcher)} It is recommended that you
  * use a {@link androidx.lifecycle.ViewModelProvider.Factory} class to do this
  * so that the setup is guaranteed to run only once.</p>
  *
  * @param <T> The State type
  * @param <U> The Side-Effect type
  */
-public class BaseViewModel<T, U> extends ViewModel {
+public class DispatcherViewModel<T, U> extends ViewModel {
     private Dispatcher<T, U> dispatcher = null;
 
     public boolean isInitialized() {
@@ -30,9 +30,9 @@ public class BaseViewModel<T, U> extends ViewModel {
     /**
      * Constructor with no parameters. Used by the android framework.
      */
-    public BaseViewModel() {}
+    public DispatcherViewModel() {}
 
-    public BaseViewModel(Dispatcher<T, U> dispatcher) {
+    public DispatcherViewModel(Dispatcher<T, U> dispatcher) {
         this.dispatcher = dispatcher;
     }
 
@@ -53,7 +53,7 @@ public class BaseViewModel<T, U> extends ViewModel {
      * or page scrolls.</p>
      *
      * <p>You must have initialized the view model previously by calling
-     * {@link BaseViewModel#setDispatcher(Dispatcher)}.</p>
+     * {@link DispatcherViewModel#setDispatcher(Dispatcher)}.</p>
      *
      * @return an ActionSink instance that can submit actions.
      */

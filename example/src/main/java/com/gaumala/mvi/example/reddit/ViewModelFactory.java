@@ -17,10 +17,15 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+        // The fragment's arguments could be used here to create
+        // the initial state
         RedditState initialState = RedditState.createInitialState();
 
         RedditSideEffectRunner runner =
                 new RedditSideEffectRunner(fragment.getResources());
+
+        // optionally, startup side effects could be run here
+
         Dispatcher<RedditState, RedditSideEffect> dispatcher =
                 new Dispatcher<>(runner, initialState);
 

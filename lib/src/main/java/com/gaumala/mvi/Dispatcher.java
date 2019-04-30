@@ -71,6 +71,13 @@ public class Dispatcher<T, U> implements ActionSink<T, U> {
         dispatch(action);
     }
 
+    @Override
+    public void submitActionSilently(Action<T, U> action) {
+        blocked = true;
+        dispatch(action);
+        blocked = false;
+    }
+
     private void dispatch(Action<T, U> action) {
         final Update<T, U> update = action.update(liveState.getValue());
 
