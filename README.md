@@ -1,14 +1,10 @@
 # MVI
 
-Model View Intent for Android
+Small collection of classes useful for implementing the Model-View-Intent design 
+pattern in Android apps.
 
-* Built on top of architecture components
+* Built on top of [Android architecture components](
+  https://developer.android.com/topic/libraries/architecture/)
+* Inspired by [The Elm Architecture](https://guide.elm-lang.org/architecture/)
 * Tiny, just a handful of classes, ~500 LOC
-* Inspired by the Elm architecture
-
-## Philosophy
-
-* Immutability by default. Prefer working with data over objects.
-
-## Examples
-
+* Easy to use both in Java and Kotlin
