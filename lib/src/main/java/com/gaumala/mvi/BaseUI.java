@@ -14,6 +14,8 @@ public abstract class BaseUI<T> {
     protected @NonNull LifecycleOwner owner;
     protected @NonNull LiveData<T> liveState;
 
+    private boolean canPublishUpdates = true;
+
     /**
      * Constructor for BaseUI.
      * @param owner an activity or fragment that owns this UI.
@@ -34,16 +36,35 @@ public abstract class BaseUI<T> {
      * </p>
      */
     public void subscribe() {
-        liveState.observe(owner, new Observer<T>() {
-            @Override
-            public void onChanged(T state) {
-                if (state != null) BaseUI.this.rebind(state);
+        if (!canPublishUpdates) {
+            canPublishUpdates = true;
+        }
+
+        if (!liveState.hasObservers())
+            liveState.observe(owner, new Observer<T>() {
+                                         @Override
+                                         public void onChanged(T state) {
+                    if (state != null && canPublishUpdates)
+                        BaseUI.this.rebind(state);
             }
-        });
+            });
 
         T initialState = liveState.getValue();
         if (initialState != null)
             rebind(initialState);
+    }
+
+    /**
+     * <p>Unsubscribes the UI to state changes. It's a temporal "undo" of
+     * {@link BaseUI#subscribe()}. </p>
+     *
+     * <p>Only call this method if you really need
+     * to ignore state updates temporarily. This class is already lifecycle
+     * aware and unsubscribes automatically when the fragment/activity stops.
+     * </p>
+     */
+    public void unsubscribe() {
+        canPublishUpdates = false;
     }
 
     /**

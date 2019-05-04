@@ -71,12 +71,4 @@ public class DispatcherViewModel<T, U> extends ViewModel {
     public LiveData<T> getLiveState() {
         return dispatcher.getLiveState();
     }
-
-    /**
-     * Calls the dispatcher's {@link Dispatcher#updateSilently(Object)} method.
-     * @param state the new state.
-     */
-    public void updateSilently(T state) {
-        dispatcher.updateSilently(state);
-    }
 }

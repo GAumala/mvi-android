@@ -27,11 +27,6 @@ public class TestSink<T, U> implements ActionSink<T, U> {
             sideEffects.add(update.sideEffect);
     }
 
-    @Override
-    public void submitActionSilently(Action<T, U> action) {
-
-    }
-
     public List<U> getGeneratedSideEffects() {
         return new ArrayList<>(sideEffects);
     }

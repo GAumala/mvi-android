@@ -19,7 +19,6 @@ public class Dispatcher<T, U> implements ActionSink<T, U> {
     private final MutableLiveData<T> mutableLiveState = new MutableLiveData<>();
     private final MediatorLiveData<T> liveState = new MediatorLiveData<>();
     private final SideEffectRunner<T, U> sideEffectRunner;
-    private boolean blocked = false;
     private OnUpdateListener<T, U> listener;
     private final Handler handler = new Handler();
 
@@ -35,7 +34,7 @@ public class Dispatcher<T, U> implements ActionSink<T, U> {
         liveState.addSource(mutableLiveState, new Observer<T>() {
             @Override
             public void onChanged(T state) {
-                if (!blocked) liveState.setValue(state);
+               liveState.setValue(state);
             }
         });
         liveState.setValue(initialValue);
@@ -50,32 +49,10 @@ public class Dispatcher<T, U> implements ActionSink<T, U> {
         return liveState;
     }
 
-    /**
-     * <p>Updates the application state without triggering an UI update right
-     * away.</p>
-     *
-     * <p>This is not meant to be used often. One potential use case is in some
-     * transitions where you want to reset the UI as the user navigates away
-     * from it.</p>
-     * @param newState The new application state. The user won't see it until
-     *                 the next state change or activity/fragment restart.
-     */
-    public void updateSilently(T newState) {
-        blocked = true;
-        mutableLiveState.setValue(newState);
-        blocked = false;
-    }
 
     @Override
     public void submitAction(Action<T, U> action) {
         dispatch(action);
-    }
-
-    @Override
-    public void submitActionSilently(Action<T, U> action) {
-        blocked = true;
-        dispatch(action);
-        blocked = false;
     }
 
     private void dispatch(Action<T, U> action) {
