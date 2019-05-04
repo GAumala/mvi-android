@@ -3,7 +3,10 @@ package com.gaumala.mvi.example.reddit;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 
 import com.gaumala.mvi.ActionSink;
 import com.gaumala.mvi.BaseUI;
@@ -32,6 +35,7 @@ class RedditGUI extends BaseUI<RedditState> {
     private final View inputForm;
     private final TextInputLayout subredditInputLayout;
     private final View submitButton;
+    private final View clearButton;
     private final GroupAdapter postsAdapter;
     private final RecyclerView postsRecycler;
     private final Toolbar toolbar;
@@ -57,11 +61,13 @@ class RedditGUI extends BaseUI<RedditState> {
 
         inputForm = view.findViewById(R.id.subreddit_input_form);
         subredditInputLayout = view.findViewById(R.id.subreddit_input_layout);
+        clearButton = view.findViewById(R.id.clear_btn);
         submitButton = view.findViewById(R.id.submit_button);
         postsRecycler = view.findViewById(R.id.posts_recycler);
         toolbar = view.findViewById(R.id.toolbar);
 
         setupRecyclers();
+        setupClearButton();
     }
 
     @Override
@@ -124,12 +130,33 @@ class RedditGUI extends BaseUI<RedditState> {
         postsRecycler.addItemDecoration(divider);
     }
 
+    private void setupClearButton() {
+        clearButton.setVisibility(View.INVISIBLE);
+        EditText editText = subredditInputLayout.getEditText();
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                clearButton.setVisibility(
+                        s.length() == 0 ? View.INVISIBLE : View.VISIBLE);
+            }
+        });
+
+        clearButton.setOnClickListener(v -> editText.setText(""));
+    }
+
     boolean onBackPressed() {
         RedditState state = liveState.getValue();
         if (state instanceof RedditState.Input)
             return false;
         else {
-            subredditInputLayout.getEditText().setText("");
             sink.submitAction(ResetForm.create());
             return true;
         }

@@ -9,27 +9,42 @@
     android:paddingTop="32dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:inputType="text"
-        android:id="@+id/subreddit_input_layout"
+    <FrameLayout
+        android:id="@+id/subreddit_frame_layout"
         android:layout_height="70dp"
         android:layout_width="match_parent"
-        android:textSize="16sp"
-        app:hintEnabled="false"
         app:layout_constraintTop_toTopOf="parent">
-        <com.google.android.material.textfield.TextInputEditText
-            android:hint="@string/subreddit_name"
+        <com.google.android.material.textfield.TextInputLayout
             android:inputType="text"
-            android:id="@+id/subreddit_edit"
-            android:maxLines="1"
+            android:id="@+id/subreddit_input_layout"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:textSize="16sp"
+            app:hintEnabled="false">
+            <com.google.android.material.textfield.TextInputEditText
+                android:hint="@string/subreddit_name"
+                android:inputType="text"
+                android:id="@+id/subreddit_edit"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/clear_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/ic_clear_accent_24dp"/>
+    </FrameLayout>
+
 
     <Button
         android:id="@+id/submit_button"
         android:text="@string/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/subreddit_input_layout"/>
+        app:layout_constraintTop_toBottomOf="@id/subreddit_frame_layout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
