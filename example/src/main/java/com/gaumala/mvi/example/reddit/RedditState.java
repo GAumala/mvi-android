@@ -1,8 +1,10 @@
 package com.gaumala.mvi.example.reddit;
 
+import android.os.Parcelable;
+
 import com.google.auto.value.AutoValue;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import androidx.annotation.StringRes;
 
@@ -11,7 +13,7 @@ public abstract class RedditState {
      * Need to input subreddit name to load posts. Show form
      */
     @AutoValue
-    public static abstract class Input extends RedditState {
+    public static abstract class Input extends RedditState implements Parcelable {
         public abstract @StringRes
         int errorResId();
 
@@ -24,7 +26,7 @@ public abstract class RedditState {
      * Posts are loading, better show a spinner in the meantime.
      */
     @AutoValue
-    public static abstract class Loading extends RedditState {
+    public static abstract class Loading extends RedditState implements Parcelable{
         public abstract String subredditName();
 
         public static Loading create(String subredditName) {
@@ -36,12 +38,11 @@ public abstract class RedditState {
      * Posts are ready to be displayed
      */
     @AutoValue
-    public static abstract class Ready extends RedditState {
+    public static abstract class Ready extends RedditState implements Parcelable {
         public abstract String subredditName();
+        public abstract ArrayList<Post> posts();
 
-        public abstract List<Post> posts();
-
-        public static Ready create(String subredditName, List<Post> posts) {
+        public static Ready create(String subredditName, ArrayList<Post> posts) {
             return new AutoValue_RedditState_Ready(subredditName, posts);
         }
     }
@@ -51,7 +52,7 @@ public abstract class RedditState {
      * Something went wrong loading the posts. Show an error message
      */
     @AutoValue
-    public static abstract class Error extends RedditState {
+    public static abstract class Error extends RedditState implements Parcelable {
         public abstract String message();
 
         public static Error create(String message) {
@@ -59,7 +60,7 @@ public abstract class RedditState {
         }
     }
 
-    public static RedditState createInitialState() {
+    public static RedditState.Input createInitialState() {
         return Input.create(-1);
     }
 }

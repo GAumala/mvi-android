@@ -17,9 +17,9 @@ public abstract class FetchPostsRes {
 
     @AutoValue
     public static abstract class Success extends FetchPostsRes {
-        public abstract List<Post> posts();
+        public abstract ArrayList<Post> posts();
 
-        public static Success create(List<Post> posts) {
+        public static Success create(ArrayList<Post> posts) {
             return new AutoValue_FetchPostsRes_Success(posts);
         }
 

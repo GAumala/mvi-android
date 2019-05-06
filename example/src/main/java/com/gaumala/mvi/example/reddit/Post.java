@@ -1,9 +1,11 @@
 package com.gaumala.mvi.example.reddit;
 
+import android.os.Parcelable;
+
 import com.google.auto.value.AutoValue;
 
 @AutoValue
-public abstract class Post {
+public abstract class Post implements Parcelable {
     public abstract String title();
     public abstract String url();
     public abstract int karma();
