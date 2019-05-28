@@ -56,7 +56,7 @@ public class Dispatcher<T, U> implements ActionSink<T, U> {
     }
 
     private void dispatch(Action<T, U> action) {
-        final Update<T, U> update = action.update(liveState.getValue());
+        final Update<T, U> update = action.update(mutableLiveState.getValue());
 
         mutableLiveState.setValue(update.state);
         if (listener != null)
