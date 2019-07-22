@@ -17,7 +17,6 @@ import androidx.lifecycle.Observer;
  */
 public class Dispatcher<T, U> implements ActionSink<T, U> {
     private final MutableLiveData<T> mutableLiveState = new MutableLiveData<>();
-    private final MediatorLiveData<T> liveState = new MediatorLiveData<>();
     private final SideEffectRunner<T, U> sideEffectRunner;
     private OnUpdateListener<T, U> listener;
     private final Handler handler = new Handler();
@@ -31,13 +30,6 @@ public class Dispatcher<T, U> implements ActionSink<T, U> {
      */
     public Dispatcher(SideEffectRunner<T, U> runner, @NonNull T initialValue) {
         mutableLiveState.setValue(initialValue);
-        liveState.addSource(mutableLiveState, new Observer<T>() {
-            @Override
-            public void onChanged(T state) {
-               liveState.setValue(state);
-            }
-        });
-        liveState.setValue(initialValue);
         this.sideEffectRunner = runner;
     }
 
@@ -46,7 +38,7 @@ public class Dispatcher<T, U> implements ActionSink<T, U> {
      * @return A live data object containing the current application state.
      */
     @NonNull public LiveData<T> getLiveState() {
-        return liveState;
+        return mutableLiveState;
     }
 
 
