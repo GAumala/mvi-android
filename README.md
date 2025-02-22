@@ -29,3 +29,4 @@ dependencies {
         implementation 'com.github.GAumala:mvi-android:1.0'
 }
 ```
+

@@ -42,11 +42,11 @@ public abstract class BaseUI<T> {
 
         if (!liveState.hasObservers())
             liveState.observe(owner, new Observer<T>() {
-                                         @Override
-                                         public void onChanged(T state) {
+                @Override
+                public void onChanged(T state) {
                     if (state != null && canPublishUpdates)
                         BaseUI.this.rebind(state);
-            }
+                }
             });
 
         T initialState = liveState.getValue();

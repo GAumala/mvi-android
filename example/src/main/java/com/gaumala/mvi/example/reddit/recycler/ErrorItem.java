@@ -1,8 +1,10 @@
 package com.gaumala.mvi.example.reddit.recycler;
 
+import android.view.View;
+
 import com.gaumala.mvi.example.R;
 import com.gaumala.mvi.example.databinding.ErrorItemBinding;
-import com.xwray.groupie.databinding.BindableItem;
+import com.xwray.groupie.viewbinding.BindableItem;
 
 import androidx.annotation.NonNull;
 
@@ -11,6 +13,12 @@ public class ErrorItem extends BindableItem<ErrorItemBinding> {
 
     public ErrorItem(String message) {
         this.message = message;
+    }
+
+    @NonNull
+    @Override
+    protected ErrorItemBinding initializeViewBinding(@NonNull View view) {
+        return ErrorItemBinding.bind(view);
     }
 
     @Override

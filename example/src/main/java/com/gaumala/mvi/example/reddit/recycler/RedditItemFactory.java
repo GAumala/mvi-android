@@ -3,7 +3,7 @@ package com.gaumala.mvi.example.reddit.recycler;
 import com.gaumala.mvi.example.reddit.OnPostClickedListener;
 import com.gaumala.mvi.example.reddit.Post;
 import com.gaumala.mvi.example.reddit.RedditState;
-import com.xwray.groupie.databinding.BindableItem;
+import com.xwray.groupie.viewbinding.BindableItem;
 
 import java.util.ArrayList;
 import java.util.List;

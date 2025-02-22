@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 public class RedditFragment extends Fragment implements OnBackPressedListener {
     private RedditGUI gui;
-    private PersistentRedditViewModel viewModel;
+    private RedditViewModel viewModel;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -38,7 +38,7 @@ public class RedditFragment extends Fragment implements OnBackPressedListener {
         setHasOptionsMenu(true);
         viewModel = ViewModelProviders
                 .of(this, new PersistentViewModelFactory(this))
-                .get(PersistentRedditViewModel.class);
+                .get(RedditViewModel.class);
 
         View view = inflater.inflate(
                 R.layout.reddit_fragment, container, false);
@@ -69,8 +69,5 @@ public class RedditFragment extends Fragment implements OnBackPressedListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        // save state on destroy
-        viewModel.saveState();
     }
 }

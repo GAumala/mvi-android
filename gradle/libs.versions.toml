@@ -1,0 +1,36 @@
+[versions]
+agp = "8.8.1"
+kotlin = "1.9.24"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.7.0"
+material = "1.12.0"
+constraintLayout = "2.2.0"
+lifecycleVersion = "2.8.7"
+lifecycleExtensions = "2.2.0"
+groupieVersion = "2.8.0"
+autovalueVersion = "1.11.0"
+autovalueParcel = "0.2.6"
+
+[libraries]
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-constraint = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintLayout" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "lifecycleExtensions" }
+lifecycle-savedstate = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "lifecycleVersion" }
+lifecycle-compiler = { group = "androidx.lifecycle", name = "lifecycle-compiler", version.ref = "lifecycleVersion" }
+groupie = { group = "com.github.lisawray.groupie", name = "groupie", version.ref = "groupieVersion" }
+groupie-viewbinding = { group = "com.github.lisawray.groupie", name = "groupie-viewbinding", version.ref = "groupieVersion" }
+autovalue = { group = "com.google.auto.value", name = "auto-value", version.ref = "autovalueVersion" }
+autovalue-annotations = { group = "com.google.auto.value", name = "auto-value-annotations", version.ref = "autovalueVersion" }
+autovalue-parcel = { group = "com.ryanharter.auto.value", name = "auto-value-parcel", version.ref = "autovalueParcel" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+

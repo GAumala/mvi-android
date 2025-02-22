@@ -1,10 +1,12 @@
 package com.gaumala.mvi.example.reddit.recycler;
 
+import android.view.View;
+
 import com.gaumala.mvi.example.R;
 import com.gaumala.mvi.example.databinding.PostItemBinding;
 import com.gaumala.mvi.example.reddit.OnPostClickedListener;
 import com.gaumala.mvi.example.reddit.Post;
-import com.xwray.groupie.databinding.BindableItem;
+import com.xwray.groupie.viewbinding.BindableItem;
 
 import androidx.annotation.NonNull;
 
@@ -15,6 +17,12 @@ public class PostItem extends BindableItem<PostItemBinding> {
     PostItem(Post post, OnPostClickedListener listener) {
         this.post = post;
         this.listener = listener;
+    }
+
+    @NonNull
+    @Override
+    protected PostItemBinding initializeViewBinding(@NonNull View view) {
+        return PostItemBinding.bind(view);
     }
 
     @Override
